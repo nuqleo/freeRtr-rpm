@@ -1,7 +1,7 @@
 %undefine _missing_build_ids_terminate_build
 
 Name:           freerouter
-Version:        23.10.18
+Version:        23.10.19
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
