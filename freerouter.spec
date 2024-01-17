@@ -1,13 +1,13 @@
 %undefine _missing_build_ids_terminate_build
 
 Name:           freerouter
-Version:        24.1.14
+Version:        24.1.16
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
 License:        CC-BY-SA
 URL:            http://www.freertr.org/
-Source0:        https://github.com/rare-freertr/freeRtr/archive/refs/tags/v%{?version}.tar.gz
+Source0:        https://github.com/mc36/freeRtr/archive/refs/tags/v%{?version}.tar.gz
 %if 0%{?fedora} || 0%{?rhel} > 7
 Recommends:     socat
 Recommends:     freerouter-native
