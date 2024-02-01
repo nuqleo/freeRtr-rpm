@@ -122,7 +122,6 @@ usermod -aG dialout freerouter
 %postun native
 %systemd_postun_with_restart freerouter-native@\*.service
 
-%ldconfig_scriptlets native
 
 %files
 %license misc/debian2/copyright
