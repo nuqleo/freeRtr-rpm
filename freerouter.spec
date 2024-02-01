@@ -77,6 +77,7 @@ find misc/demo -type f -not -name '*.txt' -delete
 sed -i 's|/usr/bin/freerouter|/usr/lib/jvm/jre-11-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
 
 mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_libdir}
 mkdir -p %{buildroot}%{_javadir}
 mkdir -p %{buildroot}%{_unitdir}
 mkdir -p %{buildroot}%{_datadir}/freerouter
@@ -85,6 +86,7 @@ mkdir -p %{buildroot}%{_sharedstatedir}/freerouter
 
 install -m644 src/rtr.jar %{buildroot}%{_javadir}
 install -m755 binTmp/*.bin %{buildroot}%{_bindir}
+install -m755 binTmp/*.so %{buildroot}%{_libdir}
 install -m755 misc/debian2/interface.sh %{buildroot}%{_datadir}/freerouter/
 install -m644 misc/debian2/interface.cpu_port %{buildroot}%{_sysconfdir}/freerouter/interfaces/cpu_port
 install -m644 misc/debian2/rtr-hw.txt misc/debian2/rtr-sw.txt %{buildroot}%{_sysconfdir}/freerouter
@@ -120,6 +122,7 @@ usermod -aG dialout freerouter
 %postun native
 %systemd_postun_with_restart freerouter-native@\*.service
 
+%ldconfig_scriptlets native
 
 %files
 %license misc/debian2/copyright
@@ -136,6 +139,7 @@ usermod -aG dialout freerouter
 %dir %{_sysconfdir}/freerouter/interfaces
 %config(noreplace) %{_sysconfdir}/freerouter/interfaces/cpu_port
 %{_bindir}/*.bin
+%{_libdir}/*.so
 %{_datadir}/freerouter/
 %{_unitdir}/freerouter-native@.service
 
