@@ -1,7 +1,8 @@
 %undefine _missing_build_ids_terminate_build
+%undefine _debugsource_packages
 
 Name:           freerouter
-Version:        24.3.29
+Version:        24.3.30
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
@@ -67,7 +68,7 @@ pushd src
 popd
 
 pushd misc/native
-sed -i '/strip/d' c.sh
+sed -i '/^strip/d' c.sh
 ./c.sh
 popd
 
@@ -85,7 +86,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/freerouter/interfaces
 mkdir -p %{buildroot}%{_sharedstatedir}/freerouter
 
 install -m644 src/rtr.jar %{buildroot}%{_javadir}
-install -m755 binTmp/*.bin %{buildroot}%{_bindir}
+cp binTmp/*.bin %{buildroot}%{_bindir}
 install -m755 binTmp/*.so %{buildroot}%{_libdir}
 install -m755 misc/debian2/interface.sh %{buildroot}%{_datadir}/freerouter/
 install -m644 misc/debian2/interface.cpu_port %{buildroot}%{_sysconfdir}/freerouter/interfaces/cpu_port
