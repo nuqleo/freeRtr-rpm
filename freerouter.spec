@@ -139,7 +139,7 @@ usermod -aG dialout freerouter
 %{_unitdir}/freerouter@.service
 
 %files native
-%doc %{SOURCE1} %{SOURCE2} %{SOURCE3}
+%doc freerouter-p4dpdk.service freerouter-p4emu.service freerouter-p4xdp.service
 %dir %{_sysconfdir}/freerouter/interfaces
 %config(noreplace) %{_sysconfdir}/freerouter/interfaces/cpu_port
 %{_bindir}/*.bin
