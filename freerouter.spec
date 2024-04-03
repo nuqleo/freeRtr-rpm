@@ -63,6 +63,7 @@ Examples of freeRouter test configurations.
 
 %prep
 %setup -q -n freeRtr-%{?version}
+cp %{SOURCE1} %{SOURCE2} %{SOURCE3} .
 
 %build
 pushd src
