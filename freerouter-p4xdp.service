@@ -1,0 +1,34 @@
+[Unit]
+Description=p4xdp specific process of freerouter
+Requires=freerouter.service freerouter-native@cpu_port.service network.target
+After=freerouter.service freerouter-native@cpu_port.service network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/p4xdp_user.bin 127.0.0.1 9080 2 skb eth0 eth1 veth250
+Restart=always
+RestartSec=5
+WorkingDirectory=/usr/bin
+User=freerouter
+Group=freerouter
+CapabilityBoundingSet=CAP_NET_RAW CAP_NET_ADMIN CAP_IPC_LOCK CAP_BPF CAP_DAC_READ_SEARCH CAP_SETPCAP CAP_SYS_ADMIN CAP_SYS_RESOURCE
+AmbientCapabilities=CAP_NET_RAW CAP_NET_ADMIN CAP_IPC_LOCK CAP_BPF CAP_DAC_READ_SEARCH CAP_SETPCAP CAP_SYS_ADMIN CAP_SYS_RESOURCE
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/freerouter /etc/freerouter
+PrivateTmp=true
+# PrivateDevices is not possible because some types need access to a physical device.
+PrivateDevices=false
+PrivateNetwork=false
+# Private Users clears all capabilities.
+PrivateUsers=false
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictNamespaces=true
+LockPersonality=true
+RemoveIPC=true
+
+[Install]
+WantedBy=multi-user.target

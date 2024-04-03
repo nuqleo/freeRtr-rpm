@@ -2,13 +2,16 @@
 %undefine _debugsource_packages
 
 Name:           freerouter
-Version:        24.4.2
+Version:        24.4.3
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
 License:        CC-BY-SA
 URL:            http://www.freertr.org/
 Source0:        https://github.com/mc36/freeRtr/archive/refs/tags/v%{?version}.tar.gz
+Source1:        freerouter-p4dpdk.service
+Source2:        freerouter-p4emu.service
+Source3:        freerouter-p4xdp.service
 %if 0%{?fedora} || 0%{?rhel} > 7
 Recommends:     socat
 Recommends:     freerouter-native
@@ -136,6 +139,7 @@ usermod -aG dialout freerouter
 %{_unitdir}/freerouter@.service
 
 %files native
+%doc %{SOURCE1} %{SOURCE2} %{SOURCE3}
 %dir %{_sysconfdir}/freerouter/interfaces
 %config(noreplace) %{_sysconfdir}/freerouter/interfaces/cpu_port
 %{_bindir}/*.bin
