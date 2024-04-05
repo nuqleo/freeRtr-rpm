@@ -5,7 +5,7 @@ After=freerouter.service freerouter-native@cpu_port.service network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/p4xdp_user.bin 127.0.0.1 9080 2 skb eth0 eth1 veth250
+ExecStart=/usr/bin/p4xdp_user.bin 127.0.0.1 9080 2 skb eth1 eth2 veth250
 Restart=always
 RestartSec=5
 WorkingDirectory=/usr/bin
