@@ -21,7 +21,7 @@ BuildRequires:  openssl-devel
 %else
 BuildRequires:  openssl1.1-devel
 %endif
-BuildRequires:  clang
+BuildRequires:  clang llvm
 BuildRequires:  dpdk-devel
 BuildRequires:  libpcap-devel
 BuildRequires:  libmnl-devel
