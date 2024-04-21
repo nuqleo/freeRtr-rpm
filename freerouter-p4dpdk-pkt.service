@@ -1,5 +1,5 @@
 [Unit]
-Description=p4xdp specific process of freerouter
+Description=p4dpdk specific process of freerouter
 Requires=freerouter.service freerouter-native@cpu_port.service network.target
 After=freerouter.service freerouter-native@cpu_port.service network.target
 
