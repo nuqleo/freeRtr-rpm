@@ -11,3 +11,4 @@ IPv6AcceptRA=no
 [Link]
 MTUBytes=9000
 Promiscuous=true
+ActivationPolicy=always-up
