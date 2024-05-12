@@ -1,5 +1,5 @@
 [Unit]
-Description=p4emu specific process of freerouter
+Description=p4udp specific process of freerouter
 Requires=freerouter.service network.target
 After=freerouter.service network.target
 
