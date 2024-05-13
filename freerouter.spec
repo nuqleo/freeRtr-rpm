@@ -16,7 +16,7 @@ Source4:        freerouter-p4mnl.service
 Source5:        freerouter-p4udp.service
 Source6:        freerouter-p4xdp.service
 %if 0%{?fedora} || 0%{?rhel} > 7
-Recommends:     socat xdp-tools
+Recommends:     socat
 Recommends:     freerouter-native
 BuildRequires:  systemd-rpm-macros
 BuildRequires:  libbpf-devel
@@ -47,7 +47,7 @@ effect: there are no vrf-awareness questions
 Summary:        Native tools for better performance than socat
 Requires:       %{name} = %{version}-%{release}
 %if 0%{?fedora} || 0%{?rhel} > 7
-Recommends:     dpdk-tools
+Recommends:     dpdk-tools xdp-tools
 %endif
 
 %description native

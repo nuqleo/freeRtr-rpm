@@ -67,6 +67,7 @@ console0
 server telnet host
  security protocol telnet
  exec timeout 0
+ exec colorize prompt
  no exec authorization
  no login authentication
  login timeout 0
