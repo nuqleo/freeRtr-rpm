@@ -15,6 +15,7 @@ Source3:        freerouter-p4emu.service
 Source4:        freerouter-p4mnl.service
 Source5:        freerouter-p4udp.service
 Source6:        freerouter-p4xdp.service
+Source7:        freerouter-p4xsk.service
 %if 0%{?fedora} || 0%{?rhel} > 7
 Recommends:     socat
 Recommends:     freerouter-native
@@ -66,7 +67,7 @@ Examples of freeRouter test configurations.
 
 %prep
 %setup -q -n freeRtr-%{?version}
-cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} .
+cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} %{SOURCE7} .
 
 %build
 pushd src
@@ -143,8 +144,10 @@ usermod -aG dialout freerouter
 %{_unitdir}/freerouter@.service
 
 %files native
-%doc freerouter-p4dpdk.service freerouter-p4dpdk-pkt.service freerouter-p4emu.service
-%doc freerouter-p4mnl.service freerouter-p4udp.service freerouter-p4xdp.service
+%doc freerouter-p4dpdk.service freerouter-p4dpdk-pkt.service
+%doc freerouter-p4emu.service freerouter-p4mnl.service
+%doc freerouter-p4udp.service freerouter-p4xdp.service
+%doc freerouter-p4xsk.service
 %dir %{_sysconfdir}/freerouter/interfaces
 %config(noreplace) %{_sysconfdir}/freerouter/interfaces/cpu_port
 %{_bindir}/*.bin
