@@ -2,7 +2,7 @@
 %undefine _debugsource_packages
 
 Name:           freerouter
-Version:        24.7.14
+Version:        24.7.15
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
@@ -20,6 +20,7 @@ Source7:        freerouter-p4xsk.service
 Recommends:     socat
 Recommends:     freerouter-native
 BuildRequires:  systemd-rpm-macros
+BuildRequires:  liburing-devel
 BuildRequires:  libxdp-devel
 BuildRequires:  openssl-devel
 %else
