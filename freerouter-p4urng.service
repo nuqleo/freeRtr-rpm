@@ -1,21 +1,18 @@
 [Unit]
-Description=p4mnl specific process of freerouter
+Description=p4urng specific process of freerouter
 Requires=freerouter.service freerouter-native@cpu_port.service network.target
 After=freerouter.service freerouter-native@cpu_port.service network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/p4mnl_user.bin 127.0.0.1 9080 2 eth1 eth2 veth250
-ExecStopPost=-/usr/sbin/ip link set dev eth1 xdpgeneric off
-ExecStopPost=-/usr/sbin/ip link set dev eth2 xdpgeneric off
-ExecStopPost=-/usr/sbin/ip link set dev veth250 xdpgeneric off
+ExecStart=/usr/bin/p4urng.bin 127.0.0.1 9080 2 eth1 eth2 veth250
 Restart=always
 RestartSec=5
 WorkingDirectory=/var/lib/freerouter
 User=freerouter
 Group=freerouter
-CapabilityBoundingSet=CAP_NET_RAW CAP_NET_ADMIN CAP_IPC_LOCK CAP_SYS_ADMIN
-AmbientCapabilities=CAP_NET_RAW CAP_NET_ADMIN CAP_IPC_LOCK CAP_SYS_ADMIN
+CapabilityBoundingSet=CAP_NET_RAW CAP_NET_ADMIN CAP_IPC_LOCK
+AmbientCapabilities=CAP_NET_RAW CAP_NET_ADMIN CAP_IPC_LOCK
 NoNewPrivileges=true
 ProtectSystem=strict
 ProtectHome=true
