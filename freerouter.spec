@@ -17,7 +17,7 @@ Source5:        freerouter-p4udp.service
 Source6:        freerouter-p4urng.service
 Source7:        freerouter-p4xdp.service
 Source8:        freerouter-p4xsk.service
-%if 0%{?fedora} || 0%{?rhel} > 7
+%if 0%{?fedora} || 0%{?rhel} > 7 || 0%{?openEuler}
 Recommends:     socat
 Recommends:     freerouter-native
 BuildRequires:  liburing-devel
