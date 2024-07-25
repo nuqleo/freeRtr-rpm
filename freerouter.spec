@@ -20,7 +20,6 @@ Source8:        freerouter-p4xsk.service
 %if 0%{?fedora} || 0%{?rhel} > 7
 Recommends:     socat
 Recommends:     freerouter-native
-BuildRequires:  systemd-rpm-macros
 BuildRequires:  liburing-devel
 BuildRequires:  libxdp-devel
 BuildRequires:  openssl-devel
