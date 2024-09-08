@@ -17,11 +17,11 @@ Source5:        freerouter-p4udp.service
 Source6:        freerouter-p4urng.service
 Source7:        freerouter-p4xdp.service
 Source8:        freerouter-p4xsk.service
-Source9:        systemd/network/10-virtio.link
-Source10:       systemd/network/20-veth.link
-Source11:       systemd/network/veth250.network
-Source12:       systemd/network/veth251.network
-Source13:       systemd/network/veth251.netdev
+Source9:        10-virtio.link
+Source10:       20-veth.link
+Source11:       veth250.network
+Source12:       veth251.network
+Source13:       veth251.netdev
 
 %if 0%{?fedora} || 0%{?rhel} > 7 || 0%{?openEuler}
 Recommends:     socat
