@@ -2,7 +2,7 @@
 %undefine _debugsource_packages
 
 Name:           freerouter
-Version:        24.9.15
+Version:        24.9.16
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
@@ -22,6 +22,7 @@ Source10:       20-veth.link
 Source11:       veth250.network
 Source12:       veth251.network
 Source13:       veth251.netdev
+Source14:       80-freerouter.conf
 
 %if 0%{?fedora} || 0%{?rhel} > 7 || 0%{?openEuler}
 Recommends:     socat
@@ -75,7 +76,7 @@ Examples of freeRouter test configurations.
 
 %prep
 %setup -q -n freeRtr-%{?version}
-cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} %{SOURCE7} %{SOURCE8} %{SOURCE9} %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} .
+cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} %{SOURCE7} %{SOURCE8} .
 
 %build
 pushd src
@@ -98,6 +99,7 @@ mkdir -p %{buildroot}%{_libdir}
 mkdir -p %{buildroot}%{_javadir}
 mkdir -p %{buildroot}%{_unitdir}
 mkdir -p %{buildroot}%{_datadir}/freerouter
+mkdir -p %{buildroot}%{_sysconfdir}/sysctl.d
 mkdir -p %{buildroot}%{_sysconfdir}/freerouter/interfaces
 mkdir -p %{buildroot}%{_sysconfdir}/systemd/network
 mkdir -p %{buildroot}%{_sharedstatedir}/freerouter
@@ -107,8 +109,9 @@ cp binTmp/*.bin %{buildroot}%{_bindir}
 install -m755 binTmp/*.so %{buildroot}%{_libdir}
 install -m755 misc/debian2/interface.sh %{buildroot}%{_datadir}/freerouter/
 install -m644 misc/debian2/interface.cpu_port %{buildroot}%{_sysconfdir}/freerouter/interfaces/cpu_port
-install -m644 misc/debian2/rtr-hw.txt misc/debian2/rtr-sw.txt %{buildroot}%{_sysconfdir}/freerouter
-install -m644 10-virtio.link 20-veth.link veth250.network veth251.network veth251.netdev %{buildroot}%{_sysconfdir}/systemd/network/
+install -m644 misc/debian2/rtr-hw.txt misc/debian2/rtr-sw.txt %{buildroot}%{_sysconfdir}/freerouter/
+install -m644 %{SOURCE9} %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{buildroot}%{_sysconfdir}/systemd/network/
+install -m644 %{SOURCE14} %{buildroot}%{_sysconfdir}/sysctl.d/
 install -m644 misc/debian2/freerouter-native@.service %{buildroot}%{_unitdir}
 install -m644 misc/debian2/freerouter.service %{buildroot}%{_unitdir}
 install -m644 misc/debian2/freerouter.service %{buildroot}%{_unitdir}/freerouter@.service
@@ -159,6 +162,7 @@ usermod -aG dialout freerouter
 %doc freerouter-p4udp.service freerouter-p4urng.service
 %doc freerouter-p4xdp.service freerouter-p4xsk.service
 %dir %{_sysconfdir}/freerouter/interfaces
+%config(noreplace) %{_sysconfdir}/sysctl.d/80-freerouter.conf
 %config(noreplace) %{_sysconfdir}/freerouter/interfaces/cpu_port
 %config(noreplace) %{_sysconfdir}/systemd/network/*
 %{_bindir}/*.bin
