@@ -2,7 +2,7 @@
 %undefine _debugsource_packages
 
 Name:           freerouter
-Version:        24.9.17
+Version:        24.9.18
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
@@ -147,7 +147,7 @@ usermod -aG dialout freerouter
 
 %files
 %license misc/debian2/copyright
-%doc misc/demo misc/captures readme.md changelog.txt todo.txt
+%doc misc/demo misc/captures readme.md changelog.txt todo.txt rtr-hw.txt rtr-sw.txt
 %dir %attr(0755,freerouter,freerouter) %{_sharedstatedir}/freerouter
 %dir %attr(0770,freerouter,freerouter) %{_sysconfdir}/freerouter
 %attr(0644,freerouter,freerouter) %config(noreplace) %{_sysconfdir}/freerouter/rtr-hw.txt

@@ -1,7 +1,7 @@
 [Unit]
 Description=p4urng specific process of freerouter
-Requires=freerouter.service freerouter-native@cpu_port.service sys-subsystem-net-devices-veth250.device
-After=freerouter.service freerouter-native@cpu_port.service sys-subsystem-net-devices-veth250.device
+Requires=freerouter.service freerouter-native@cpu_port.service network.target sys-subsystem-net-devices-veth250.device
+After=freerouter.service freerouter-native@cpu_port.service network.target sys-subsystem-net-devices-veth250.device
 
 [Service]
 Type=simple
