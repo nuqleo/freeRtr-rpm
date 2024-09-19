@@ -70,7 +70,6 @@ server telnet host
  exec colorize prompt
  no exec authorization
  no login authentication
- login timeout 0
  vrf host
  exit
 !
