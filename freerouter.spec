@@ -2,7 +2,7 @@
 %undefine _debugsource_packages
 
 Name:           freerouter
-Version:        24.9.26
+Version:        24.9.27
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
@@ -24,14 +24,14 @@ Source12:       veth251.network
 Source13:       veth251.netdev
 Source14:       80-freerouter.conf
 
-%if 0%{?fedora} || 0%{?rhel} > 7 || 0%{?openEuler}
-Recommends:     socat
-Recommends:     freerouter-native
+%if 0%{?rhel} == 7
+BuildRequires:  openssl1.1-devel
+%else
+BuildRequires:  openssl-devel
 BuildRequires:  liburing-devel
 BuildRequires:  libxdp-devel
-BuildRequires:  openssl-devel
-%else
-BuildRequires:  openssl1.1-devel
+Recommends:     freerouter-native
+Recommends:     socat
 %endif
 BuildRequires:  systemd
 BuildRequires:  clang llvm
@@ -56,7 +56,7 @@ effect: there are no vrf-awareness questions
 %package native
 Summary:        Native tools for better performance than socat
 Requires:       %{name} = %{version}-%{release}
-%if 0%{?fedora} || 0%{?rhel} > 7 || 0%{?openEuler}
+%if 0%{?rhel} != 7
 Recommends:     dpdk-tools xdp-tools systemd-networkd
 %endif
 
