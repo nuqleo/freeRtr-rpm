@@ -2,7 +2,7 @@
 %undefine _debugsource_packages
 
 Name:           freerouter
-Version:        24.10.12
+Version:        24.10.13
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
@@ -32,6 +32,7 @@ BuildRequires:  liburing-devel
 BuildRequires:  libxdp-devel
 Recommends:     freerouter-native
 Recommends:     socat
+Recommends:     telnet
 %endif
 BuildRequires:  systemd
 BuildRequires:  clang llvm
