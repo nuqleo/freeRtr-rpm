@@ -39,8 +39,13 @@ BuildRequires:  clang llvm
 BuildRequires:  dpdk-devel
 BuildRequires:  libpcap-devel
 BuildRequires:  libmnl-devel
+%if 0%{?fedora} > 41 || 0%{?rhel} > 9
+BuildRequires:  java-21-openjdk-devel
+Requires:       java-21-openjdk-headless
+%else
 BuildRequires:  java-11-openjdk-devel
 Requires:       java-11-openjdk-headless
+%endif
 
 %description
 freeRouter speaks routing protocols, and (re)encapsulates packets on
@@ -93,7 +98,11 @@ popd
 %install
 find binTmp -size 0 -print -delete
 find misc/demo -type f -not -name '*.txt' -delete
+%if 0%{?fedora} > 41 || 0%{?rhel} > 9
+sed -i 's|/usr/bin/freerouter|/usr/lib/jvm/jre-21-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
+%else
 sed -i 's|/usr/bin/freerouter|/usr/lib/jvm/jre-11-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
+%endif
 
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_libdir}
