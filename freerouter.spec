@@ -2,7 +2,7 @@
 %undefine _debugsource_packages
 
 Name:           freerouter
-Version:        25.1.11
+Version:        25.1.12
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
