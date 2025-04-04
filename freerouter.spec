@@ -1,8 +1,9 @@
 %undefine _missing_build_ids_terminate_build
 %undefine _debugsource_packages
+%define _use_weak_usergroup_deps 1
 
 Name:           freerouter
-Version:        25.4.2
+Version:        25.4.3
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
