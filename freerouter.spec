@@ -3,7 +3,7 @@
 %define _use_weak_usergroup_deps 1
 
 Name:           freerouter
-Version:        25.4.8
+Version:        25.4.9
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
