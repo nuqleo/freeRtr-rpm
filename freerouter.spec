@@ -3,7 +3,7 @@
 %define _use_weak_usergroup_deps 1
 
 Name:           freerouter
-Version:        25.4.24
+Version:        25.4.25
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
@@ -25,28 +25,19 @@ Source12:       veth251.network
 Source13:       veth251.netdev
 Source14:       80-freerouter.conf
 
-%if 0%{?rhel} == 7
-BuildRequires:  openssl1.1-devel
-%else
-BuildRequires:  openssl-devel
+BuildRequires:  clang llvm
+BuildRequires:  dpdk-devel
+BuildRequires:  libmnl-devel
+BuildRequires:  libpcap-devel
 BuildRequires:  liburing-devel
 BuildRequires:  libxdp-devel
+BuildRequires:  openssl-devel
+BuildRequires:  systemd
+BuildRequires:  java-21-openjdk-devel
+Requires:       java-21-openjdk-headless
 Recommends:     freerouter-native
 Recommends:     socat
 Recommends:     telnet
-%endif
-BuildRequires:  systemd
-BuildRequires:  clang llvm
-BuildRequires:  dpdk-devel
-BuildRequires:  libpcap-devel
-BuildRequires:  libmnl-devel
-%if 0%{?fedora} > 41 || 0%{?rhel} > 9
-BuildRequires:  java-21-openjdk-devel
-Requires:       java-21-openjdk-headless
-%else
-BuildRequires:  java-11-openjdk-devel
-Requires:       java-11-openjdk-headless
-%endif
 
 %description
 freeRouter speaks routing protocols, and (re)encapsulates packets on
@@ -63,9 +54,7 @@ effect: there are no vrf-awareness questions
 %package native
 Summary:        Native tools for better performance than socat
 Requires:       %{name} = %{version}-%{release}
-%if 0%{?rhel} != 7
 Recommends:     dpdk-tools xdp-tools systemd-networkd
-%endif
 
 %description native
 These tools are completely optional but should deliver better performance
@@ -99,11 +88,7 @@ popd
 %install
 find binTmp -size 0 -print -delete
 find misc/demo -type f -not -name '*.txt' -delete
-%if 0%{?fedora} > 41 || 0%{?rhel} > 9
 sed -i 's|/usr/bin/freerouter|/usr/lib/jvm/jre-21-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
-%else
-sed -i 's|/usr/bin/freerouter|/usr/lib/jvm/jre-11-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
-%endif
 
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_libdir}
