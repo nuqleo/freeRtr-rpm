@@ -77,6 +77,13 @@ Examples of freeRouter test configurations.
 %setup -q -n freeRtr-%{?version}
 cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} %{SOURCE7} %{SOURCE8} .
 
+%if 0%{?suse_version}
+sed -i 's|/usr/bin/freerouter|/usr/lib64/jvm/jre-21-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
+sed -i 's|libmnl/libmnl.h|libmnl/libmnl/libmnl.h|g' misc/native/{p4mnl_user.c,veth.c}
+%else
+sed -i 's|/usr/bin/freerouter|/usr/lib/jvm/jre-21-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
+%endif
+
 %build
 pushd src
 ./cj.sh
@@ -91,11 +98,6 @@ popd
 %install
 find binTmp -size 0 -print -delete
 find misc/demo -type f -not -name '*.txt' -delete
-%if 0%{?suse_version}
-sed -i 's|/usr/bin/freerouter|/usr/lib64/jvm/jre-21-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
-%else
-sed -i 's|/usr/bin/freerouter|/usr/lib/jvm/jre-21-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
-%endif
 
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_libdir}
