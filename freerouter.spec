@@ -3,7 +3,7 @@
 %define _use_weak_usergroup_deps 1
 
 Name:           freerouter
-Version:        25.9.12
+Version:        25.9.13
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
@@ -32,12 +32,15 @@ BuildRequires:  libpcap-devel
 BuildRequires:  liburing-devel
 BuildRequires:  libxdp-devel
 BuildRequires:  openssl-devel
-BuildRequires:  systemd
+BuildRequires:  systemd zip
 BuildRequires:  java-21-openjdk-devel
 Requires:       java-21-openjdk-headless
 Recommends:     freerouter-native
 Recommends:     socat
 Recommends:     telnet
+%if 0%{?fedora} || 0%{?suse_version}
+Requires(pre):  group(dialout)
+%endif
 
 %description
 freeRouter speaks routing protocols, and (re)encapsulates packets on
@@ -88,7 +91,11 @@ popd
 %install
 find binTmp -size 0 -print -delete
 find misc/demo -type f -not -name '*.txt' -delete
+%if 0%{?suse_version}
+sed -i 's|/usr/bin/freerouter|/usr/lib64/jvm/jre-21-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
+%else
 sed -i 's|/usr/bin/freerouter|/usr/lib/jvm/jre-21-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
+%endif
 
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_libdir}
