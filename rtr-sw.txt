@@ -67,7 +67,7 @@ console0
 server telnet host
  security protocol telnet
  exec timeout 0
- exec colorize prompt
+ exec colorize header
  no exec authorization
  no login authentication
  vrf host
