@@ -24,6 +24,8 @@ Source11:       veth250.network
 Source12:       veth251.network
 Source13:       veth251.netdev
 Source14:       80-freerouter.conf
+Source15:       rtr-hw.txt
+Source16:       rtr-sw.txt
 
 BuildRequires:  clang llvm
 BuildRequires:  dpdk-devel
@@ -76,6 +78,7 @@ Examples of freeRouter test configurations.
 %prep
 %setup -q -n freeRtr-%{?version}
 cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} %{SOURCE7} %{SOURCE8} .
+cp %{SOURCE15} %{SOURCE16} misc
 
 %if 0%{?suse_version}
 sed -i 's|/usr/bin/freerouter|/usr/lib64/jvm/jre-21-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
@@ -166,6 +169,7 @@ usermod -aG dialout freerouter
 %doc freerouter-p4emu.service freerouter-p4mnl.service
 %doc freerouter-p4udp.service freerouter-p4urng.service
 %doc freerouter-p4xdp.service freerouter-p4xsk.service
+%doc misc/rtr-hw.txt misc/rtr-sw.txt
 %dir %{_sysconfdir}/freerouter/interfaces
 %config(noreplace) %{_sysconfdir}/sysctl.d/80-freerouter.conf
 %config(noreplace) %{_sysconfdir}/freerouter/interfaces/cpu_port
