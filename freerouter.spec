@@ -27,6 +27,9 @@ Source14:       80-freerouter.conf
 Source15:       rtr-hw.txt
 Source16:       rtr-sw.txt
 
+%if ! 0%{?suse_version}
+BuildRequires:  compiler-rt
+%endif
 BuildRequires:  clang llvm
 BuildRequires:  dpdk-devel
 BuildRequires:  libmnl-devel
@@ -97,6 +100,14 @@ pushd misc/native
 sed -i '/^$CS/d' c.sh
 ./c.sh
 popd
+
+%check
+%if ! 0%{?suse_version}
+%ifnarch ppc64le
+cd misc/native
+./p4emu_fuzzer.sh
+%endif
+%endif
 
 %install
 find binTmp -size 0 -print -delete
