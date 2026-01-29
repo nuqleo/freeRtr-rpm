@@ -38,8 +38,13 @@ BuildRequires:  liburing-devel
 BuildRequires:  libxdp-devel
 BuildRequires:  openssl-devel
 BuildRequires:  systemd zip
+%if 0%{??openEuler} || 0%{?rhel} == 8
 BuildRequires:  java-21-openjdk-devel
 Requires:       java-21-openjdk-headless
+%else
+BuildRequires:  java-25-openjdk-devel
+Requires:       java-25-openjdk-headless
+%endif
 Recommends:     freerouter-native
 Recommends:     socat
 Recommends:     telnet
@@ -84,10 +89,14 @@ cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} %{SOURCE7} 
 cp %{SOURCE15} %{SOURCE16} misc
 
 %if 0%{?suse_version}
-sed -i 's|/usr/bin/freerouter|/usr/lib64/jvm/jre-21-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
+sed -i 's|/usr/bin/freerouter|/usr/lib64/jvm/jre-25-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
 sed -i 's|libmnl/libmnl.h|libmnl/libmnl/libmnl.h|g' misc/native/{p4mnl_user.c,veth.c}
 %else
+%if 0%{??openEuler} || 0%{?rhel} == 8
 sed -i 's|/usr/bin/freerouter|/usr/lib/jvm/jre-21-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
+%else
+sed -i 's|/usr/bin/freerouter|/usr/lib/jvm/jre-25-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
+%endif
 %endif
 
 %build
