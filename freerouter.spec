@@ -34,6 +34,7 @@ BuildRequires:  clang llvm
 BuildRequires:  dpdk-devel
 BuildRequires:  libmnl-devel
 BuildRequires:  libpcap-devel
+BuildRequires:  libstdc++-devel
 BuildRequires:  liburing-devel
 BuildRequires:  libxdp-devel
 BuildRequires:  openssl-devel
@@ -111,11 +112,9 @@ sed -i '/^$CS/d' c.sh
 popd
 
 %check
-%if ! 0%{?suse_version}
 %ifnarch ppc64le
 cd misc/native
 ./p4emu_fuzzer.sh
-%endif
 %endif
 
 %install
