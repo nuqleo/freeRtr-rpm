@@ -1,8 +1,8 @@
 # freeRtr RPM Packages
 
-This repository contains RPM spec files for building *[freeRtr](https://github.com/mc36/freeRtr)* packages.  
+This repository contains RPM spec files for building *freeRtr* packages.  
 
-*freeRouter* is a free, open source router process and some dataplanes.
+*[freeRouter](https://github.com/mc36/freeRtr)* is a free, open source router process and some dataplanes.
 
 The spec files are mainly used to build RPMs in COPR. Prebuilt packages are available for:
 
