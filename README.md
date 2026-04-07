@@ -15,4 +15,7 @@ You can use this repository to build your own packages or get them directly from
 
 ## Notes
 
-systemd-networkd configuration for `veth250` and `veth251` is required, as these interfaces are used by `freerouter-native@cpu_port` and `freerouter-p4` services for communication between dataplanes and the main freeRouter process.
+systemd-networkd configuration for `veth250` and `veth251` is required, as these interfaces are used by `freerouter-native@cpu_port` and `freerouter-p4*` services for communication between dataplanes and the main freeRouter process.
+
+`freerouter-p4*` services are example dataplane services (p4emu, p4dpdk, p4xdp, etc.) from the `freerouter-native` package and must be adjusted according to your interface names and PCI device numbers.
+
