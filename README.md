@@ -1,6 +1,6 @@
 # freeRtr RPM Packages
 
-This repository contains RPM spec and systemd configuration files for building *[freeRtr](http://www.freertr.org/)* packages.
+This [repository](https://github.com/nuqleo/freeRtr-rpm) contains RPM spec and systemd configuration files for building *[freeRtr](http://www.freertr.org/)* packages.
 
 *[freeRouter](https://github.com/mc36/freeRtr)* is a free, open source router process and some dataplanes.
 

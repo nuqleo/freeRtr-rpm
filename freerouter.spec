@@ -3,7 +3,7 @@
 %define _use_weak_usergroup_deps 1
 
 Name:           freerouter
-Version:        26.4.19
+Version:        26.4.20
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
@@ -26,6 +26,7 @@ Source13:       veth251.netdev
 Source14:       80-freerouter.conf
 Source15:       rtr-hw.txt
 Source16:       rtr-sw.txt
+Source17:       README.md
 
 %if ! 0%{?suse_version}
 BuildRequires:  compiler-rt
@@ -87,7 +88,7 @@ Examples of freeRouter test configurations.
 %prep
 %setup -q -n freeRtr-%{?version}
 cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} %{SOURCE7} %{SOURCE8} .
-cp %{SOURCE15} %{SOURCE16} misc
+cp %{SOURCE15} %{SOURCE16} %{SOURCE17} misc
 
 %if 0%{?suse_version}
 sed -i 's|/usr/bin/freerouter|/usr/lib64/jvm/jre-25-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
@@ -188,7 +189,7 @@ usermod -aG dialout freerouter
 %doc freerouter-p4emu.service freerouter-p4mnl.service
 %doc freerouter-p4udp.service freerouter-p4urng.service
 %doc freerouter-p4xdp.service freerouter-p4xsk.service
-%doc misc/rtr-hw.txt misc/rtr-sw.txt
+%doc misc/rtr-hw.txt misc/rtr-sw.txt misc/README.md
 %dir %{_sysconfdir}/freerouter/interfaces
 %config(noreplace) %{_sysconfdir}/sysctl.d/80-freerouter.conf
 %config(noreplace) %{_sysconfdir}/freerouter/interfaces/cpu_port
