@@ -108,7 +108,7 @@ pushd src
 popd
 
 pushd misc/native
-sed -i '/^$CS/d' c.sh
+sed -i '/^$CS/d' i.sh
 ./c.sh
 popd
 
