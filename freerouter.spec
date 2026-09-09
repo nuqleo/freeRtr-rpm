@@ -114,7 +114,7 @@ popd
 
 %check
 %ifnarch ppc64le
-cd misc/fusser
+cd misc/forward
 ./p4emu_fuzzer.sh
 %endif
 
