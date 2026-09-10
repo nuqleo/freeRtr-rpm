@@ -115,7 +115,7 @@ popd
 %check
 %ifnarch ppc64le
 cd misc/forward
-./p4emu_fuzzer.sh
+./p4fuzzer.sh
 %endif
 
 %install
