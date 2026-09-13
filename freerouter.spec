@@ -39,6 +39,9 @@ BuildRequires:  libstdc++-devel
 BuildRequires:  liburing-devel
 BuildRequires:  libxdp-devel
 BuildRequires:  openssl-devel
+BuildRequires:  libsamplerate-devel
+BuildRequires:  libsndfile-devel
+BuildRequires:  alsa-lib-devel
 BuildRequires:  systemd zip
 %if 0%{??openEuler} || 0%{?rhel} == 8
 BuildRequires:  java-21-openjdk-devel
@@ -75,6 +78,11 @@ Recommends:     dpdk-tools xdp-tools systemd-networkd
 These tools are completely optional but should deliver better performance
 than socat.
 
+%package sound
+Summary:        Audio and sound card tools
+
+%description sound
+Audio and sound card tools.
 
 %package doc
 BuildArch:      noarch
@@ -107,8 +115,15 @@ pushd src
 ./cp.sh
 popd
 
+sed -i '/^$CS/d' misc/native/i.sh
+
+pushd misc/sound
+./c.sh
+popd
+
+mv binTmp binTmp.sound
+
 pushd misc/native
-sed -i '/^$CS/d' i.sh
 ./c.sh
 popd
 
@@ -133,7 +148,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/systemd/network
 mkdir -p %{buildroot}%{_sharedstatedir}/freerouter
 
 install -m644 src/rtr.jar %{buildroot}%{_javadir}
-cp binTmp/*.bin %{buildroot}%{_bindir}
+cp binTmp/*.bin binTmp.sound/*.bin %{buildroot}%{_bindir}
 install -m755 binTmp/*.so %{buildroot}%{_libdir}
 install -m755 misc/debian2/interface.sh %{buildroot}%{_datadir}/freerouter/
 install -m644 misc/debian2/interface.cpu_port %{buildroot}%{_sysconfdir}/freerouter/interfaces/cpu_port
@@ -144,6 +159,9 @@ install -m644 misc/debian2/freerouter-native@.service %{buildroot}%{_unitdir}
 install -m644 misc/debian2/freerouter.service %{buildroot}%{_unitdir}
 install -m644 misc/debian2/freerouter.service %{buildroot}%{_unitdir}/freerouter@.service
 sed -i 's|rtr-|%i-|g' %{buildroot}%{_unitdir}/freerouter@.service
+
+find binTmp -name '*.bin' -printf '%{_bindir}/%f\n' > native.files
+find binTmp.sound -name '*.bin' -printf '%{_bindir}/%f\n' > sound.files
 
 %pre
 getent group freerouter >/dev/null 2>&1 || groupadd -r freerouter >/dev/null 2>&1 || :
@@ -184,7 +202,7 @@ usermod -aG dialout freerouter
 %{_unitdir}/freerouter.service
 %{_unitdir}/freerouter@.service
 
-%files native
+%files native -f native.files
 %doc freerouter-p4dpdk.service freerouter-p4dpdk-pkt.service
 %doc freerouter-p4emu.service freerouter-p4mnl.service
 %doc freerouter-p4udp.service freerouter-p4urng.service
@@ -194,10 +212,11 @@ usermod -aG dialout freerouter
 %config(noreplace) %{_sysconfdir}/sysctl.d/80-freerouter.conf
 %config(noreplace) %{_sysconfdir}/freerouter/interfaces/cpu_port
 %config(noreplace) %{_sysconfdir}/systemd/network/*
-%{_bindir}/*.bin
 %{_libdir}/*.so
 %{_datadir}/freerouter/
 %{_unitdir}/freerouter-native@.service
+
+%files sound -f sound.files
 
 %files doc
 %doc cfg
