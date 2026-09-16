@@ -1,9 +1,7 @@
-%undefine _missing_build_ids_terminate_build
-%undefine _debugsource_packages
 %define _use_weak_usergroup_deps 1
 
 Name:           freerouter
-Version:        26.9.14
+Version:        26.9.15
 Release:        1%{?dist}
 Summary:        Free, open source router OS process
 
@@ -116,6 +114,8 @@ pushd src
 popd
 
 sed -i '/^$CS/d' misc/native/i.sh
+sed -i 's/MD="-O3"/MD="-O3 -g -gdwarf-4"/g' misc/native/i.sh
+sed -i 's/build-id=none/build-id=sha1/g' misc/native/i.sh
 
 pushd misc/sound
 ./c.sh
