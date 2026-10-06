@@ -39,6 +39,7 @@ BuildRequires:  libxdp-devel
 BuildRequires:  openssl-devel
 BuildRequires:  libsamplerate-devel
 BuildRequires:  libsndfile-devel
+BuildRequires:  opus-devel
 BuildRequires:  alsa-lib-devel
 BuildRequires:  systemd zip
 %if 0%{??openEuler} || 0%{?rhel} == 8
