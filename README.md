@@ -8,7 +8,6 @@ The spec file is mainly used to build RPMs in COPR. Prebuilt packages are availa
 
 - Fedora
 - Enterprise Linux 8–10 (RHEL, CentOS Stream, AlmaLinux, Rocky)
-- openSUSE Tumbleweed
 - openEuler
 
 You can use this repository to build your own packages or get them directly from [COPR](https://copr.fedorainfracloud.org/coprs/nucleo/freerouter/).
