@@ -101,7 +101,7 @@ cp %{SOURCE15} %{SOURCE16} %{SOURCE17} misc
 sed -i 's|/usr/bin/freerouter|/usr/lib64/jvm/jre-25-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
 sed -i 's|libmnl/libmnl.h|libmnl/libmnl/libmnl.h|g' misc/native/{p4mnl_user.c,veth.c}
 %else
-%if 0%{??openEuler} || 0%{?rhel} == 8
+%if 0%{?rhel} == 8
 sed -i 's|/usr/bin/freerouter|/usr/lib/jvm/jre-21-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
 %else
 sed -i 's|/usr/bin/freerouter|/usr/lib/jvm/jre-25-openjdk/bin/java -jar /usr/share/java/rtr.jar|g' misc/debian2/freerouter.service
