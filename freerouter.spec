@@ -42,7 +42,7 @@ BuildRequires:  libsndfile-devel
 BuildRequires:  opus-devel
 BuildRequires:  alsa-lib-devel
 BuildRequires:  systemd zip
-%if 0%{??openEuler} || 0%{?rhel} == 8
+%if 0%{?rhel} == 8
 BuildRequires:  java-21-openjdk-devel
 Requires:       java-21-openjdk-headless
 %else
